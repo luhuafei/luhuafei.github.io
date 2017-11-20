@@ -82,14 +82,14 @@
 <meta name="description" content="从网上看到很多面试试题, 总结一些自己觉的不错的. 为什么说OC是一门动态语言oc类的类型和数据变量的类型都是在运行时确定的,而不是在编译时确定的,例如多态性: 多态特性, 我们可以使用父类对象来指定子类对象, 并且可以用来调用子类的方法.运行时特性, 我们可以动态 的添加方法或者替换方法.">
 <meta name="keywords" content="总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IOS面试试题">
+<meta property="og:title" content="IOS试题">
 <meta property="og:url" content="https://github.com/luhuafei/luhuafei.github.io.git/2017/10/01/IOS面试试题/index.html">
 <meta property="og:site_name" content="LHF.SITE">
 <meta property="og:description" content="从网上看到很多面试试题, 总结一些自己觉的不错的. 为什么说OC是一门动态语言oc类的类型和数据变量的类型都是在运行时确定的,而不是在编译时确定的,例如多态性: 多态特性, 我们可以使用父类对象来指定子类对象, 并且可以用来调用子类的方法.运行时特性, 我们可以动态 的添加方法或者替换方法.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-17T03:07:57.000Z">
+<meta property="og:updated_time" content="2017-11-17T08:57:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IOS面试试题">
+<meta name="twitter:title" content="IOS试题">
 <meta name="twitter:description" content="从网上看到很多面试试题, 总结一些自己觉的不错的. 为什么说OC是一门动态语言oc类的类型和数据变量的类型都是在运行时确定的,而不是在编译时确定的,例如多态性: 多态特性, 我们可以使用父类对象来指定子类对象, 并且可以用来调用子类的方法.运行时特性, 我们可以动态 的添加方法或者替换方法.">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>IOS面试试题 | LHF.SITE</title>
+  <title>IOS试题 | LHF.SITE</title>
   
 
 
@@ -256,7 +256,7 @@
     <link itemprop="mainEntityOfPage" href="https://github.com/luhuafei/luhuafei.github.io.git/2017/10/01/IOS面试试题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="shanghai_kope">
+      <meta itemprop="name" content="L&L">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/icon.jpg">
     </span>
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IOS面试试题</h1>
+          <h1 class="post-title" itemprop="name headline">IOS试题</h1>
         
 
         <div class="post-meta">
@@ -393,8 +393,25 @@ delgate和datasource都可以使用require和optional来修饰
     对象, 从而置为nil.  
 </code></pre><h3 id="给类添加一个属性后-在类结构体里那些元素会发生变化"><a href="#给类添加一个属性后-在类结构体里那些元素会发生变化" class="headerlink" title="给类添加一个属性后, 在类结构体里那些元素会发生变化"></a>给类添加一个属性后, 在类结构体里那些元素会发生变化</h3><pre><code>1.instance_size: 实力内存的大小
 2.objc_ivar_list *ivars : 属性列表
-</code></pre><p>  更多相关 <a href="https://juejin.im/post/59ee81615188250385370582" target="_blank" rel="external">runtime</a>                   </p>
-<p>   <em>部分内容来源于网络，后续还会更新。</em></p>
+</code></pre><p>  更多相关 <a href="https://juejin.im/post/59ee81615188250385370582" target="_blank" rel="external">runtime</a>     </p>
+<h2 id="runLoop"><a href="#runLoop" class="headerlink" title="runLoop"></a>runLoop</h2><h3 id="runloop是用来做什么的-runloop和线程有什么关系-主线程默认开启了runloop吗-子线程呢"><a href="#runloop是用来做什么的-runloop和线程有什么关系-主线程默认开启了runloop吗-子线程呢" class="headerlink" title="runloop是用来做什么的? runloop和线程有什么关系? 主线程默认开启了runloop吗? 子线程呢?"></a>runloop是用来做什么的? runloop和线程有什么关系? 主线程默认开启了runloop吗? 子线程呢?</h3><pre><code>runloop:循坏跑圈,用来处理线程里面的事件和消息.
+runloop和线程的关系:每个线程如果想继续运行, 不被释放, 就必须有一个runloop来不停地跑圈, 处理线
+                                  程里面的各个事件和消息
+主线程默认开启一个runloop, 也就是这个runloop才能保证我们程序正常的运行, 子线程是默认没有开始
+runloop                                 
+</code></pre><h3 id="runloop的model是用来做什么的-有几种mode"><a href="#runloop的model是用来做什么的-有几种mode" class="headerlink" title="runloop的model是用来做什么的? 有几种mode"></a>runloop的model是用来做什么的? 有几种mode</h3><pre><code>系统默认注册了5个model:
+      1.KCFRunLoopDefaultMode:App的默认Mode, 通常主线程是在这个Mode下运行的.
+      2.UITrackingRunLoopMode: 界面跟踪Mode, 用于ScrollView追踪触摸、混动, 保证界面滑动时不受
+          model影响
+      3.UIInitializationLoopMode:在刚启动App时,进入的第一个mode, 启动完成后就不再使用啦
+      4,GSEvenReceiveRunLoopMode:接受系统事件的内部model, 通常用不到
+      5,KCFRunLoopCommonModes:这是一个展位的mode, 没有实际作用.
+      iOS对以上的mode进行了封装: NSDefaultRunLoopMode  和   NSRunLoopCommonModes
+</code></pre><h3 id="为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了"><a href="#为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了" class="headerlink" title="为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了"></a>为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了</h3><pre><code>NStimer对象是在NSDefaultRunLoopMode下面调用消息的, 但是当我们滑动scrollview的时候,
+NSDefaultRunLoopMode      
+模式就自动切换到UITrackingRunLoopMode模式下面, 却不可以继续响应NSTimer发送消息,所以如果想在滑动
+scrollView的情况下面还调用NSTimer的消息, 我们可以把NSRunloop的模式更改为NSRUnLoopCommonModes
+</code></pre><p>   <em>部分内容来源于网络，后续还会更新。</em></p>
 
       
     </div>
@@ -501,9 +518,9 @@ delgate和datasource都可以使用require和optional来修饰
             
               <img class="site-author-image" itemprop="image"
                 src="/images/icon.jpg"
-                alt="shanghai_kope" />
+                alt="L&L" />
             
-              <p class="site-author-name" itemprop="name">shanghai_kope</p>
+              <p class="site-author-name" itemprop="name">L&L</p>
               <p class="site-description motion-element" itemprop="description">iOS开发工程师, 篮球爱好者.</p>
           </div>
 
@@ -571,7 +588,7 @@ delgate和datasource都可以使用require和optional来修饰
               <ul class="links-of-blogroll-list">
                 
                   <li class="links-of-blogroll-item">
-                    <a href="http://alonemonkey.com" title="aloneMonkey" target="_blank">aloneMonkey</a>
+                    <a href="http://www.alonemonkey.com" title="aloneMonkey" target="_blank">aloneMonkey</a>
                   </li>
                 
               </ul>
@@ -593,7 +610,7 @@ delgate和datasource都可以使用require和optional来修饰
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么说OC是一门动态语言"><span class="nav-number">1.</span> <span class="nav-text">为什么说OC是一门动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么代理要用weak-代理的delegate和dataSource有什么区别-block和代理的区别"><span class="nav-number">2.</span> <span class="nav-text">为什么代理要用weak? 代理的delegate和dataSource有什么区别? block和代理的区别?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么IBOutlet修饰的控件使用weak来修饰的"><span class="nav-number">3.</span> <span class="nav-text">为什么IBOutlet修饰的控件使用weak来修饰的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">4.</span> <span class="nav-text">Runtime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#objc在向一个对象发送消息时-发生了什么"><span class="nav-number">4.1.</span> <span class="nav-text">objc在向一个对象发送消息时,发生了什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候会报unrecognized-selector错误-ios有哪些机制避免走到这一步"><span class="nav-number">4.2.</span> <span class="nav-text">什么时候会报unrecognized selector错误? ios有哪些机制避免走到这一步?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能否向编译后得到的类中增加实例变量-能否向运行时创建的类中添加实例变量-为什么"><span class="nav-number">4.3.</span> <span class="nav-text">能否向编译后得到的类中增加实例变量? 能否向运行时创建的类中添加实例变量? 为什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime如何实现weak变量的自动置nil"><span class="nav-number">4.4.</span> <span class="nav-text">runtime如何实现weak变量的自动置nil?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给类添加一个属性后-在类结构体里那些元素会发生变化"><span class="nav-number">4.5.</span> <span class="nav-text">给类添加一个属性后, 在类结构体里那些元素会发生变化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么说OC是一门动态语言"><span class="nav-number">1.</span> <span class="nav-text">为什么说OC是一门动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么代理要用weak-代理的delegate和dataSource有什么区别-block和代理的区别"><span class="nav-number">2.</span> <span class="nav-text">为什么代理要用weak? 代理的delegate和dataSource有什么区别? block和代理的区别?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么IBOutlet修饰的控件使用weak来修饰的"><span class="nav-number">3.</span> <span class="nav-text">为什么IBOutlet修饰的控件使用weak来修饰的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">4.</span> <span class="nav-text">Runtime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#objc在向一个对象发送消息时-发生了什么"><span class="nav-number">4.1.</span> <span class="nav-text">objc在向一个对象发送消息时,发生了什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候会报unrecognized-selector错误-ios有哪些机制避免走到这一步"><span class="nav-number">4.2.</span> <span class="nav-text">什么时候会报unrecognized selector错误? ios有哪些机制避免走到这一步?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能否向编译后得到的类中增加实例变量-能否向运行时创建的类中添加实例变量-为什么"><span class="nav-number">4.3.</span> <span class="nav-text">能否向编译后得到的类中增加实例变量? 能否向运行时创建的类中添加实例变量? 为什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime如何实现weak变量的自动置nil"><span class="nav-number">4.4.</span> <span class="nav-text">runtime如何实现weak变量的自动置nil?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给类添加一个属性后-在类结构体里那些元素会发生变化"><span class="nav-number">4.5.</span> <span class="nav-text">给类添加一个属性后, 在类结构体里那些元素会发生变化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#runLoop"><span class="nav-number">5.</span> <span class="nav-text">runLoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#runloop是用来做什么的-runloop和线程有什么关系-主线程默认开启了runloop吗-子线程呢"><span class="nav-number">5.1.</span> <span class="nav-text">runloop是用来做什么的? runloop和线程有什么关系? 主线程默认开启了runloop吗? 子线程呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runloop的model是用来做什么的-有几种mode"><span class="nav-number">5.2.</span> <span class="nav-text">runloop的model是用来做什么的? 有几种mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了"><span class="nav-number">5.3.</span> <span class="nav-text">为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -617,7 +634,7 @@ delgate和datasource都可以使用require和optional来修饰
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">shanghai_kope</span>
+  <span class="author" itemprop="copyrightHolder">L&L</span>
 
   
 </div>
