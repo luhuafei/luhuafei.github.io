@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT, 芦华飞, iOS学习" />
+  <meta name="keywords" content="总结," />
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="iOS开发工程师, 篮球爱好者.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LHF.SITE">
-<meta property="og:url" content="https://github.com/luhuafei/luhuafei.github.io.git/index.html">
+<meta name="description" content="1.不用临时变量怎么实现swap(a,b)第一种(加减法):         a = a + b;         b = a - b;         a = a - b;  第二种(异或法);       a = a ^ b;       b = a ^ b;(a ^ b ^ b = a)       a = a ^ b;(a ^ b ^ a = b) (b还是刚开始的那个b) 2.二维有序数">
+<meta name="keywords" content="总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BAT试题">
+<meta property="og:url" content="https://github.com/luhuafei/luhuafei.github.io.git/2017/10/15/BAT试题/index.html">
 <meta property="og:site_name" content="LHF.SITE">
-<meta property="og:description" content="iOS开发工程师, 篮球爱好者.">
+<meta property="og:description" content="1.不用临时变量怎么实现swap(a,b)第一种(加减法):         a = a + b;         b = a - b;         a = a - b;  第二种(异或法);       a = a ^ b;       b = a ^ b;(a ^ b ^ b = a)       a = a ^ b;(a ^ b ^ a = b) (b还是刚开始的那个b) 2.二维有序数">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-62f859c2ac6f95ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-28T09:40:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LHF.SITE">
-<meta name="twitter:description" content="iOS开发工程师, 篮球爱好者.">
+<meta name="twitter:title" content="BAT试题">
+<meta name="twitter:description" content="1.不用临时变量怎么实现swap(a,b)第一种(加减法):         a = a + b;         b = a - b;         a = a - b;  第二种(异或法);       a = a ^ b;       b = a ^ b;(a ^ b ^ b = a)       a = a ^ b;(a ^ b ^ a = b) (b还是刚开始的那个b) 2.二维有序数">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1156494-62f859c2ac6f95ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/luhuafei/luhuafei.github.io.git/"/>
+  <link rel="canonical" href="https://github.com/luhuafei/luhuafei.github.io.git/2017/10/15/BAT试题/"/>
 
 
 
 
 
-  <title>LHF.SITE - 知难而上</title>
+  <title>BAT试题 | LHF.SITE</title>
   
 
 
@@ -143,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +240,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -269,9 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/15/BAT试题/" itemprop="url">BAT试题</a></h1>
+          <h1 class="post-title" itemprop="name headline">BAT试题</h1>
         
 
         <div class="post-meta">
@@ -343,8 +344,7 @@
       
 
       
-        
-          <h2 id="1-不用临时变量怎么实现swap-a-b"><a href="#1-不用临时变量怎么实现swap-a-b" class="headerlink" title="1.不用临时变量怎么实现swap(a,b)"></a>1.不用临时变量怎么实现swap(a,b)</h2><pre><code>第一种(加减法):
+        <h2 id="1-不用临时变量怎么实现swap-a-b"><a href="#1-不用临时变量怎么实现swap-a-b" class="headerlink" title="1.不用临时变量怎么实现swap(a,b)"></a>1.不用临时变量怎么实现swap(a,b)</h2><pre><code>第一种(加减法):
         a = a + b;
         b = a - b;
         a = a - b;
@@ -385,15 +385,45 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
 
     return isFind;
 }
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/15/BAT试题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+</code></pre><a id="more"></a>   
+<h2 id="了解常见的排序算法"><a href="#了解常见的排序算法" class="headerlink" title="了解常见的排序算法"></a>了解常见的排序算法</h2><pre><code>插入排序(直接插入排序, 希尔排序),  选择排序(简单选择排序, 堆排序), 交换排序(冒泡排序, 快速排序), 归并排序, 基数排序.
+</code></pre><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>他们的新能比较:<br><img src="http://upload-images.jianshu.io/upload_images/1156494-62f859c2ac6f95ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="性能比较">   </p>
+<h4 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h4><pre><code>将数组中的所有元素一次跟前面已经排好的元素相比较, 如果选择的元素比已排序的元素  
+小, 则交换, 知道全部元素都比较过.
+</code></pre><h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><pre><code>将待排序数组按照步长gap进行分组, 然后将每组的元素利用直接插入排序的方法进行排
+序; 每次将gap折半减小, 循坏上述操作; 当gap=1时, 利用直接插入, 完成排序;
+</code></pre><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><h4 id="直接选择排序"><a href="#直接选择排序" class="headerlink" title="直接选择排序"></a>直接选择排序</h4><pre><code>   比较+交换
+1. 从待排序序列中, 找到关键字最小的元素.
+2. 如果最小元素不是待排序序列的第一个元素, 将其和第一个元素互换.
+3. 从余下的N - 1个元素中, 找出关键字最小的元素, 重复(1)、(2)步, 直到排序结束,
+</code></pre><h4 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h4><pre><code>堆:本质是一种数组对象, 特别重要的一点性质: 任意的叶子节点小于(或大于)它所有的父
+节点, 对此, 又分为大顶堆和小顶堆
+1 首先将序列构建成为大顶堆.
+2 取出当前大顶堆的根节点, 将其与序列末尾元素进行交换;
+3 对交换后的n-1个序列元素进行调整, 使其满足大顶堆的性质;
+4 重复2,3步骤直至堆中只有一个元素为止.
+</code></pre><h3 id="交换排序"><a href="#交换排序" class="headerlink" title="交换排序"></a>交换排序</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><pre><code>1. 将序列中的左右元素, 一次比较, 保证右边的元素始终大于左边的元素(第一轮结束后, 序
+    列的最后一个元素一定是当前序列的最大值);
+2. 对序列当中剩下n-1个元素再次执行步骤1;
+3. 对于长度为n的序列, 一共需要执行n-1轮比较
+</code></pre><h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p>   挖坑填数+分治法</p>
+<pre><code>1. 从序列当中选择一个基准数(pivot),在这里我们选择序列当中第一个数为基准数.
+2. 将序列当中的所有数一次遍历, 比基准数大的位于其右侧, 比基准小的位于其左侧.
+3. 重复步骤1,2, 知道所有的子集当中只有一个元素为止.   
+</code></pre><h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><pre><code>归并排序是建立在归并操作上的一种有效的排序算法, 该算法是采用分治法的一个非常典
+型的应用, 将已有序的子序列合并, 得到完  全有序的序列; 即先使每个子序列有序, 
+再使子序列段间有序, 若将两个有序表合并成一个有序表, 称为二路合并   
+</code></pre><h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><p>实现方法:最高位优先(MSD = Most Significant Digit first) 和 最低位优先(LSD = Least Significant Digit first)</p>
+<pre><code>基数排序:通过序列中各个元素的值, 对排序的N个元素进行若干躺的分配与收集来实现排序
+分配:我们将L[i]中的元素取出, 首先确定其个位上的数字, 根据该数字分配到与之序号相同的桶中
+收集:当序列中所有的元素都分配到对应的桶中, 再按照顺序依次将桶中的元素收集形成新的一个待排序列
+ L[]
+对新形成的序列L[]重复执行分配和收集元素中的十位、百位直到分配完该序列中的最高位,则排序结束.
+</code></pre><p>   堆排序、归并排序、基数排序相对较快。</p>
+<h2 id="4-说说你对OC中的load方法和initalize方法的异同-主要说一下执行时间-各自用途-没有实现子类的方法会不会调用父类的方法"><a href="#4-说说你对OC中的load方法和initalize方法的异同-主要说一下执行时间-各自用途-没有实现子类的方法会不会调用父类的方法" class="headerlink" title="4, 说说你对OC中的load方法和initalize方法的异同, 主要说一下执行时间, 各自用途, 没有实现子类的方法会不会调用父类的方法?"></a>4, 说说你对OC中的load方法和initalize方法的异同, 主要说一下执行时间, 各自用途, 没有实现子类的方法会不会调用父类的方法?</h2><p>load:</p>
+<pre><code>顾名思义, load方法在这个文件程序装载时调用, 只要是在compile source中出现的文件总是会被装载, 这雨这个类是否被调用无关,
+</code></pre><p><em>部分内容来源于网络，后续还会更新。</em></p>
+
       
     </div>
     
@@ -408,323 +438,36 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/luhuafei/luhuafei.github.io.git/2017/10/08/SDWebImage的内部实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L&L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/icon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LHF.SITE">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/08/SDWebImage的内部实现/" itemprop="url">SDWebImage的内部实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T16:30:31+08:00">
-                2017-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/总结/" rel="tag"># 总结</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h1 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h1><pre><code>1. 入口setImageWithUrl: placeholderIamge: options: 会先把placeholder显示, 然后
-    SDImageManager根据URL开始处理图片.
- 2. 进入SDWebImageManager的- downLoadWithUrl:delegate:options:userInfo:, 交给
-      SDImageCache从缓存中查找图片是否已经下载 queryDiskCacheForKey:delegate:userInfo   
- 3.先从内存图片缓存查找是否有图片, 如果内存中已经有图片缓存, SDImageCacheDelegate回调
-    imageCache:didFindImage:forKey:userInfo到SDWebimageManager.
- 4.SDWebImageManagerDelegate 回调webImageManager:didFinishWithImage:到UIImageView + 
-    WebCache等前端展示图片
- 5,如果内存中没有, 生成NSInvocationOperation添加到队列开始从硬盘查找图片是否已经缓存.
- 6,根据URLKey早硬盘缓存目录下尝试读取图片文件, 这一步是在NSOperation进行操作, 所以回主线程进行结
-     果回调notifyDelegate   
- 7.   如果上一操作从硬盘读取到了图片, 将图片添加到缓存中(如果空闲内存过小, 会先清空内存缓存),  
-       SDImageCacheDelegate回调imageCache:didFindImage:forKey:userInfo:. 进而回调展示图片.
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/08/SDWebImage的内部实现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/08/SDWebImage的内部实现/" rel="next" title="SDWebImage的内部实现">
+                <i class="fa fa-chevron-left"></i> SDWebImage的内部实现
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/luhuafei/luhuafei.github.io.git/2017/10/01/IOS面试试题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L&L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/icon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LHF.SITE">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/01/IOS面试试题/" itemprop="url">IOS试题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-01T13:30:31+08:00">
-                2017-10-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/试题/" itemprop="url" rel="index">
-                    <span itemprop="name">试题</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>从网上看到很多面试试题, 总结一些自己觉的不错的.</p>
-<h2 id="为什么说OC是一门动态语言"><a href="#为什么说OC是一门动态语言" class="headerlink" title="为什么说OC是一门动态语言"></a>为什么说OC是一门动态语言</h2><pre><code>oc类的类型和数据变量的类型都是在运行时确定的,而不是在编译时确定的,例如多态性: 多态特性,
-我们可以使用父类对象来指定子类对象, 并且可以用来调用子类的方法.运行时特性, 我们可以动态
-的添加方法或者替换方法.   
-</code></pre>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/01/IOS面试试题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -734,166 +477,11 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/luhuafei/luhuafei.github.io.git/2017/09/07/使用方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="L&L">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/icon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LHF.SITE">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/07/使用方法/" itemprop="url">使用方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T10:14:40+08:00">
-                2017-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
-<p>我再也没有想过你<br>因为你心已不在这里<br>再也没有</p>
-</blockquote>
-<h2 id="列表-1-2-3"><a href="#列表-1-2-3" class="headerlink" title="列表(1,2,3)"></a>列表(1,2,3)</h2><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><ul>
-<li>科比<blockquote>
-<p>男<br>美国</p>
-</blockquote>
-</li>
-<li>韦德</li>
-<li>詹姆斯</li>
-<li>安东尼
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/07/使用方法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -901,6 +489,10 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
 
 
           
+
+  
+
+
 
         </div>
         
@@ -921,8 +513,17 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1010,6 +611,22 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-不用临时变量怎么实现swap-a-b"><span class="nav-number">1.</span> <span class="nav-text">1.不用临时变量怎么实现swap(a,b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-二维有序数组查找数字"><span class="nav-number">2.</span> <span class="nav-text">2.二维有序数组查找数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解常见的排序算法"><span class="nav-number">3.</span> <span class="nav-text">了解常见的排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">3.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接插入排序"><span class="nav-number">3.1.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔排序"><span class="nav-number">3.1.2.</span> <span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">3.2.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接选择排序"><span class="nav-number">3.2.1.</span> <span class="nav-text">直接选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆排序"><span class="nav-number">3.2.2.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换排序"><span class="nav-number">3.3.</span> <span class="nav-text">交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-number">3.3.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">3.3.2.</span> <span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">3.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数排序"><span class="nav-number">3.5.</span> <span class="nav-text">基数排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-说说你对OC中的load方法和initalize方法的异同-主要说一下执行时间-各自用途-没有实现子类的方法会不会调用父类的方法"><span class="nav-number">4.</span> <span class="nav-text">4, 说说你对OC中的load方法和initalize方法的异同, 主要说一下执行时间, 各自用途, 没有实现子类的方法会不会调用父类的方法?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1143,6 +760,10 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 

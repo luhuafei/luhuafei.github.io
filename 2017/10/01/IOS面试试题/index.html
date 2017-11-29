@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LHF.SITE">
 <meta property="og:description" content="从网上看到很多面试试题, 总结一些自己觉的不错的. 为什么说OC是一门动态语言oc类的类型和数据变量的类型都是在运行时确定的,而不是在编译时确定的,例如多态性: 多态特性, 我们可以使用父类对象来指定子类对象, 并且可以用来调用子类的方法.运行时特性, 我们可以动态 的添加方法或者替换方法.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-17T08:57:19.000Z">
+<meta property="og:updated_time" content="2017-11-23T09:14:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IOS试题">
 <meta name="twitter:description" content="从网上看到很多面试试题, 总结一些自己觉的不错的. 为什么说OC是一门动态语言oc类的类型和数据变量的类型都是在运行时确定的,而不是在编译时确定的,例如多态性: 多态特性, 我们可以使用父类对象来指定子类对象, 并且可以用来调用子类的方法.运行时特性, 我们可以动态 的添加方法或者替换方法.">
@@ -393,7 +393,24 @@ delgate和datasource都可以使用require和optional来修饰
     对象, 从而置为nil.  
 </code></pre><h3 id="给类添加一个属性后-在类结构体里那些元素会发生变化"><a href="#给类添加一个属性后-在类结构体里那些元素会发生变化" class="headerlink" title="给类添加一个属性后, 在类结构体里那些元素会发生变化"></a>给类添加一个属性后, 在类结构体里那些元素会发生变化</h3><pre><code>1.instance_size: 实力内存的大小
 2.objc_ivar_list *ivars : 属性列表
-</code></pre><p>  更多相关 <a href="https://juejin.im/post/59ee81615188250385370582" target="_blank" rel="external">runtime</a>     </p>
+</code></pre><p>   首先Runtime 系统会把方法调用转化为消息发送, 即objc_msgSend, 并且把方法的调用者, 和方法选择器, 当做参数传递过去,此时, 方法的调用者会通过isa指针来找到其所属的类, 然后cache 或者 methodLists中查找该方法, 找到就跳到对应的方法去执行.<br>   如果在类中没有找到该方法, 则通过super_class往上一级超类查找(如果一直找到NSObject都没有找到该方法, 这种情况, 我)      </p>
+<p>混淆点:</p>
+<blockquote>
+<pre><code> @implementation Son : Father
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        NSLog(@&quot;%@&quot;, NSStringFromClass([self class]));
+        NSLog(@&quot;%@&quot;, NSStringFromClass([super class]));
+    }
+    return self;
+}
+@end
+</code></pre><p>常见的例子, 答案输出的全部是<code>Son</code><br>NSStringFromClass([self class])这个为什么是<code>Son</code>, 不做分析啦都能理解, 下面细分析一下 NSStringFromClass([super class])这个的内部的实现,<br>     1.第一步先构造objc_super结构体, 结构体的第一个成员就是self, 第二个成员是<br>        (id)class_getSuperclass(objc_getClass(“Son”)).<br>      2.第二步是去father这个类里去找-(Class)class, 没有, 然后去NSObject类去找, 找到了, 最后内部是使用<br>      objc_msgSend((objc_super-&gt;receiver) ,@selector(class))去掉用, 此时已经和[self class]调用的相同了, 所以两个<br>      输出的结果都是Son.</p>
+</blockquote>
+<p>  更多相关 <a href="https://juejin.im/post/59ee81615188250385370582" target="_blank" rel="external">runtime</a>     </p>
 <h2 id="runLoop"><a href="#runLoop" class="headerlink" title="runLoop"></a>runLoop</h2><h3 id="runloop是用来做什么的-runloop和线程有什么关系-主线程默认开启了runloop吗-子线程呢"><a href="#runloop是用来做什么的-runloop和线程有什么关系-主线程默认开启了runloop吗-子线程呢" class="headerlink" title="runloop是用来做什么的? runloop和线程有什么关系? 主线程默认开启了runloop吗? 子线程呢?"></a>runloop是用来做什么的? runloop和线程有什么关系? 主线程默认开启了runloop吗? 子线程呢?</h3><pre><code>runloop:循坏跑圈,用来处理线程里面的事件和消息.
 runloop和线程的关系:每个线程如果想继续运行, 不被释放, 就必须有一个runloop来不停地跑圈, 处理线
                                   程里面的各个事件和消息
@@ -407,10 +424,32 @@ runloop
       4,GSEvenReceiveRunLoopMode:接受系统事件的内部model, 通常用不到
       5,KCFRunLoopCommonModes:这是一个展位的mode, 没有实际作用.
       iOS对以上的mode进行了封装: NSDefaultRunLoopMode  和   NSRunLoopCommonModes
-</code></pre><h3 id="为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了"><a href="#为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了" class="headerlink" title="为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了"></a>为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了</h3><pre><code>NStimer对象是在NSDefaultRunLoopMode下面调用消息的, 但是当我们滑动scrollview的时候,
+</code></pre><h2 id="为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了"><a href="#为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了" class="headerlink" title="为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了"></a>为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了</h2><pre><code>NStimer对象是在NSDefaultRunLoopMode下面调用消息的, 但是当我们滑动scrollview的时候,
 NSDefaultRunLoopMode      
 模式就自动切换到UITrackingRunLoopMode模式下面, 却不可以继续响应NSTimer发送消息,所以如果想在滑动
 scrollView的情况下面还调用NSTimer的消息, 我们可以把NSRunloop的模式更改为NSRUnLoopCommonModes
+</code></pre><h3 id="什么是arc-arc解决什么问题"><a href="#什么是arc-arc解决什么问题" class="headerlink" title="什么是arc?(arc解决什么问题?)"></a>什么是arc?(arc解决什么问题?)</h3><pre><code>首先解释ARC:automatic reference counting 自动引用计数, ARC几个要点: 在对象被创建时retain count +1, 在对象  
+被release时, retain count -1, 当 retain count 为0时, 销毁对象,
+程序员中加入autoreleasepool的对象会由系统自动加上autorelease方法, 如果该对象引用计数为0, 则销毁.
+
+解决问题; MRC下内存管理的缺点,
+  1.当我们要释放一个堆内存时, 首先要确定只想这个堆空间的指针都没release了(避免提前释放).
+  2.释放指针指向的堆空间, 首先确定哪些指针指向同一个堆, 这些指针只能释放一次.(MRC下即谁创建水释放, 避
+     免重复释放)       
+  3.模块化操作时, 对象可能被多个模块创建和使用, 不能确定最后由谁去释放
+  4.多线程操作时, 不确定那个线程最后使用完毕.
+</code></pre><h2 id="请解释以下keywords-的区别-assign-VS-weak-block-VS-weak"><a href="#请解释以下keywords-的区别-assign-VS-weak-block-VS-weak" class="headerlink" title="请解释以下keywords       的区别: assign VS weak, block VS weak"></a>请解释以下keywords       的区别: assign VS weak, <strong>block VS </strong>weak</h2><pre><code>assin使用于基本数据类型, weak是使用于NSobject对象, 并且是一个弱引用.
+assign其实也可以用来修饰对象, 那么我们为什么不用它呢?  因为被assign修饰的对象在释放之后, 指针的地址
+还是存在的, 也就是说指针并没有被置nil, 如果后续的内存分配中, 刚好分到了这块地址, 程序就会崩掉. 而weak
+修饰的对象在释放后, 指针地址会被置nil, 所以现在一般弱引用就是用weak.
+
+首先__block是用来修饰一个变量, 这个变量就可以在block中被修改
+   __block;使用__block修饰的变量在block代码块中会被retain(ARC下, MRC下不会retain)
+   __weak:使用__weak修饰的变量不会在block代码块中被retain.
+  同时, 在ARC下, 要避免block出现循坏引用__weak rypedof(self)weakself = self;
+</code></pre><h2 id="void-load-void-initialize-有什么用处"><a href="#void-load-void-initialize-有什么用处" class="headerlink" title="+(void)load; +(void)initialize; 有什么用处?"></a>+(void)load; +(void)initialize; 有什么用处?</h2><pre><code>在Objcetive-C中, runtime会自动调用每个类的两个方法. +(void)load会在类初始加载时调用, +(void)initialize会在
+第一次调用类的类方法或实例方法之前被调用, 这两个方法是可选的, 且只有在实现了他们时才会被调用
+共同点:两个方法都只会被调用一次.
 </code></pre><p>   <em>部分内容来源于网络，后续还会更新。</em></p>
 
       
@@ -451,6 +490,10 @@ scrollView的情况下面还调用NSTimer的消息, 我们可以把NSRunloop的�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/08/SDWebImage的内部实现/" rel="prev" title="SDWebImage的内部实现">
+                SDWebImage的内部实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -531,7 +574,7 @@ scrollView的情况下面还调用NSTimer的消息, 我们可以把NSRunloop的�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -542,7 +585,7 @@ scrollView的情况下面还调用NSTimer的消息, 我们可以把NSRunloop的�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -553,7 +596,7 @@ scrollView的情况下面还调用NSTimer的消息, 我们可以把NSRunloop的�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -610,7 +653,7 @@ scrollView的情况下面还调用NSTimer的消息, 我们可以把NSRunloop的�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么说OC是一门动态语言"><span class="nav-number">1.</span> <span class="nav-text">为什么说OC是一门动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么代理要用weak-代理的delegate和dataSource有什么区别-block和代理的区别"><span class="nav-number">2.</span> <span class="nav-text">为什么代理要用weak? 代理的delegate和dataSource有什么区别? block和代理的区别?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么IBOutlet修饰的控件使用weak来修饰的"><span class="nav-number">3.</span> <span class="nav-text">为什么IBOutlet修饰的控件使用weak来修饰的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">4.</span> <span class="nav-text">Runtime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#objc在向一个对象发送消息时-发生了什么"><span class="nav-number">4.1.</span> <span class="nav-text">objc在向一个对象发送消息时,发生了什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候会报unrecognized-selector错误-ios有哪些机制避免走到这一步"><span class="nav-number">4.2.</span> <span class="nav-text">什么时候会报unrecognized selector错误? ios有哪些机制避免走到这一步?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能否向编译后得到的类中增加实例变量-能否向运行时创建的类中添加实例变量-为什么"><span class="nav-number">4.3.</span> <span class="nav-text">能否向编译后得到的类中增加实例变量? 能否向运行时创建的类中添加实例变量? 为什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime如何实现weak变量的自动置nil"><span class="nav-number">4.4.</span> <span class="nav-text">runtime如何实现weak变量的自动置nil?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给类添加一个属性后-在类结构体里那些元素会发生变化"><span class="nav-number">4.5.</span> <span class="nav-text">给类添加一个属性后, 在类结构体里那些元素会发生变化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#runLoop"><span class="nav-number">5.</span> <span class="nav-text">runLoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#runloop是用来做什么的-runloop和线程有什么关系-主线程默认开启了runloop吗-子线程呢"><span class="nav-number">5.1.</span> <span class="nav-text">runloop是用来做什么的? runloop和线程有什么关系? 主线程默认开启了runloop吗? 子线程呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runloop的model是用来做什么的-有几种mode"><span class="nav-number">5.2.</span> <span class="nav-text">runloop的model是用来做什么的? 有几种mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了"><span class="nav-number">5.3.</span> <span class="nav-text">为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么说OC是一门动态语言"><span class="nav-number">1.</span> <span class="nav-text">为什么说OC是一门动态语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么代理要用weak-代理的delegate和dataSource有什么区别-block和代理的区别"><span class="nav-number">2.</span> <span class="nav-text">为什么代理要用weak? 代理的delegate和dataSource有什么区别? block和代理的区别?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么IBOutlet修饰的控件使用weak来修饰的"><span class="nav-number">3.</span> <span class="nav-text">为什么IBOutlet修饰的控件使用weak来修饰的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Runtime"><span class="nav-number">4.</span> <span class="nav-text">Runtime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#objc在向一个对象发送消息时-发生了什么"><span class="nav-number">4.1.</span> <span class="nav-text">objc在向一个对象发送消息时,发生了什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候会报unrecognized-selector错误-ios有哪些机制避免走到这一步"><span class="nav-number">4.2.</span> <span class="nav-text">什么时候会报unrecognized selector错误? ios有哪些机制避免走到这一步?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能否向编译后得到的类中增加实例变量-能否向运行时创建的类中添加实例变量-为什么"><span class="nav-number">4.3.</span> <span class="nav-text">能否向编译后得到的类中增加实例变量? 能否向运行时创建的类中添加实例变量? 为什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime如何实现weak变量的自动置nil"><span class="nav-number">4.4.</span> <span class="nav-text">runtime如何实现weak变量的自动置nil?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给类添加一个属性后-在类结构体里那些元素会发生变化"><span class="nav-number">4.5.</span> <span class="nav-text">给类添加一个属性后, 在类结构体里那些元素会发生变化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#runLoop"><span class="nav-number">5.</span> <span class="nav-text">runLoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#runloop是用来做什么的-runloop和线程有什么关系-主线程默认开启了runloop吗-子线程呢"><span class="nav-number">5.1.</span> <span class="nav-text">runloop是用来做什么的? runloop和线程有什么关系? 主线程默认开启了runloop吗? 子线程呢?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runloop的model是用来做什么的-有几种mode"><span class="nav-number">5.2.</span> <span class="nav-text">runloop的model是用来做什么的? 有几种mode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后-滑动scrollView的时候NSTimer却不动了"><span class="nav-number">6.</span> <span class="nav-text">为什么吧NStimer对象以NSDefaultRunLoopMode添加到主运行循坏以后, 滑动scrollView的时候NSTimer却不动了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是arc-arc解决什么问题"><span class="nav-number">6.1.</span> <span class="nav-text">什么是arc?(arc解决什么问题?)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请解释以下keywords-的区别-assign-VS-weak-block-VS-weak"><span class="nav-number">7.</span> <span class="nav-text">请解释以下keywords       的区别: assign VS weak, block VS weak</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#void-load-void-initialize-有什么用处"><span class="nav-number">8.</span> <span class="nav-text">+(void)load; +(void)initialize; 有什么用处?</span></a></li></ol></div>
             
 
           </div>
