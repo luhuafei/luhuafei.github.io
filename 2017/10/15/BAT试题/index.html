@@ -88,7 +88,7 @@
 <meta property="og:description" content="1.不用临时变量怎么实现swap(a,b)第一种(加减法):         a = a + b;         b = a - b;         a = a - b;  第二种(异或法);       a = a ^ b;       b = a ^ b;(a ^ b ^ b = a)       a = a ^ b;(a ^ b ^ a = b) (b还是刚开始的那个b) 2.二维有序数">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1156494-62f859c2ac6f95ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-28T09:40:44.000Z">
+<meta property="og:updated_time" content="2017-11-29T07:58:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BAT试题">
 <meta name="twitter:description" content="1.不用临时变量怎么实现swap(a,b)第一种(加减法):         a = a + b;         b = a - b;         a = a - b;  第二种(异或法);       a = a ^ b;       b = a ^ b;(a ^ b ^ b = a)       a = a ^ b;(a ^ b ^ a = b) (b还是刚开始的那个b) 2.二维有序数">
@@ -421,8 +421,18 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
 对新形成的序列L[]重复执行分配和收集元素中的十位、百位直到分配完该序列中的最高位,则排序结束.
 </code></pre><p>   堆排序、归并排序、基数排序相对较快。</p>
 <h2 id="4-说说你对OC中的load方法和initalize方法的异同-主要说一下执行时间-各自用途-没有实现子类的方法会不会调用父类的方法"><a href="#4-说说你对OC中的load方法和initalize方法的异同-主要说一下执行时间-各自用途-没有实现子类的方法会不会调用父类的方法" class="headerlink" title="4, 说说你对OC中的load方法和initalize方法的异同, 主要说一下执行时间, 各自用途, 没有实现子类的方法会不会调用父类的方法?"></a>4, 说说你对OC中的load方法和initalize方法的异同, 主要说一下执行时间, 各自用途, 没有实现子类的方法会不会调用父类的方法?</h2><p>load:</p>
-<pre><code>顾名思义, load方法在这个文件程序装载时调用, 只要是在compile source中出现的文件总是会被装载, 这雨这个类是否被调用无关,
-</code></pre><p><em>部分内容来源于网络，后续还会更新。</em></p>
+<pre><code>顾名思义, load方法在这个文件程序装载时调用, 只要是在compile source中出现的文件总是会被装载, 这与这个类是否被调用无关,因此load方法总是在main函数之前调用, 所以, 不管有没有实现子类的方法, 父类的方法都会被调用.
+由于调用load方法时的坏境很不安全, 我们应该尽量减少load方法的逻辑, 另一个原因是load方法是线程安全的, 它内部使用了锁, 所以我们应该避免线程阻塞在load方法中.
+</code></pre><p>initialize:</p>
+<pre><code>这个方法在第一次给某个类发送信息时调用(比如实例化一个对象), 并且只会调用一次, initialize方法实际上市一种惰性调用, 也就是说如果一个类一直没被用到, 那它的initialize方法也不会被调用, 这一点有利于节约资源.
+即使子类没有实现initialize方法, 也会调用父类的方法,
+initialize方法主要用来对一些不方便在编译期初始化的对象进行赋值, 比如NSMutableArray这种类型的实例化依赖于runtime的消息发送, 所以显然无法在编译期初始化
+</code></pre><h2 id="5说说你对-MVC-和-MVVM-的理解。"><a href="#5说说你对-MVC-和-MVVM-的理解。" class="headerlink" title="5说说你对 MVC 和 MVVM 的理解。"></a>5说说你对 MVC 和 MVVM 的理解。</h2><p>MVC:</p>
+<pre><code>Model:数据的拥有者, 实现具体的业务逻辑.
+View:具体的用户界面, 如按钮、列表、图片等.
+Controller: 负责将view中用户的动作传达给model, 将model的数据通过view展现出来.
+</code></pre><p>  <a href="http://www.jianshu.com/p/db8400e1d40e" target="_blank" rel="external">参考链接1</a>    <a href="http://www.jianshu.com/p/caaa173071f3" target="_blank" rel="external">参考链接2</a>  </p>
+<p><em>部分内容来源于网络，后续还会更新。</em></p>
 
       
     </div>
@@ -462,6 +472,10 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/27/weChat好友列表/" rel="prev" title="weChat好友列表">
+                weChat好友列表 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -542,7 +556,7 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -621,7 +635,7 @@ public static bool Find(int[,] matrix, int rows, int columns, int number)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-不用临时变量怎么实现swap-a-b"><span class="nav-number">1.</span> <span class="nav-text">1.不用临时变量怎么实现swap(a,b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-二维有序数组查找数字"><span class="nav-number">2.</span> <span class="nav-text">2.二维有序数组查找数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解常见的排序算法"><span class="nav-number">3.</span> <span class="nav-text">了解常见的排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">3.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接插入排序"><span class="nav-number">3.1.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔排序"><span class="nav-number">3.1.2.</span> <span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">3.2.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接选择排序"><span class="nav-number">3.2.1.</span> <span class="nav-text">直接选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆排序"><span class="nav-number">3.2.2.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换排序"><span class="nav-number">3.3.</span> <span class="nav-text">交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-number">3.3.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">3.3.2.</span> <span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">3.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数排序"><span class="nav-number">3.5.</span> <span class="nav-text">基数排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-说说你对OC中的load方法和initalize方法的异同-主要说一下执行时间-各自用途-没有实现子类的方法会不会调用父类的方法"><span class="nav-number">4.</span> <span class="nav-text">4, 说说你对OC中的load方法和initalize方法的异同, 主要说一下执行时间, 各自用途, 没有实现子类的方法会不会调用父类的方法?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-不用临时变量怎么实现swap-a-b"><span class="nav-number">1.</span> <span class="nav-text">1.不用临时变量怎么实现swap(a,b)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-二维有序数组查找数字"><span class="nav-number">2.</span> <span class="nav-text">2.二维有序数组查找数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解常见的排序算法"><span class="nav-number">3.</span> <span class="nav-text">了解常见的排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">3.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接插入排序"><span class="nav-number">3.1.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔排序"><span class="nav-number">3.1.2.</span> <span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">3.2.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接选择排序"><span class="nav-number">3.2.1.</span> <span class="nav-text">直接选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆排序"><span class="nav-number">3.2.2.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交换排序"><span class="nav-number">3.3.</span> <span class="nav-text">交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-number">3.3.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">3.3.2.</span> <span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">3.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数排序"><span class="nav-number">3.5.</span> <span class="nav-text">基数排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-说说你对OC中的load方法和initalize方法的异同-主要说一下执行时间-各自用途-没有实现子类的方法会不会调用父类的方法"><span class="nav-number">4.</span> <span class="nav-text">4, 说说你对OC中的load方法和initalize方法的异同, 主要说一下执行时间, 各自用途, 没有实现子类的方法会不会调用父类的方法?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5说说你对-MVC-和-MVVM-的理解。"><span class="nav-number">5.</span> <span class="nav-text">5说说你对 MVC 和 MVVM 的理解。</span></a></li></ol></div>
             
 
           </div>
