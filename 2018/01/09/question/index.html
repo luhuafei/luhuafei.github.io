@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT, 芦华飞, iOS学习" />
+  <meta name="keywords" content="python," />
 
 
 
@@ -79,17 +79,23 @@
 
 
 
-<meta name="description" content="最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda, 这次省了不少麻烦">
+<meta name="description" content="最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda和WebDriverAgent, 这次省了不少麻烦.">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="大会&amp;英雄">
 <meta property="og:url" content="https://github.com/luhuafei/luhuafei.github.io.git/2018/01/09/question/index.html">
 <meta property="og:site_name" content="LHF.SITE">
-<meta property="og:description" content="最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda, 这次省了不少麻烦">
+<meta property="og:description" content="最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda和WebDriverAgent, 这次省了不少麻烦.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-10T09:41:38.000Z">
+<meta property="og:image" content="https://github.com/images/a1.png">
+<meta property="og:image" content="https://github.com/images/q1.png">
+<meta property="og:image" content="https://github.com/images/a.png">
+<meta property="og:image" content="https://github.com/images/q.png">
+<meta property="og:updated_time" content="2018-01-11T02:32:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="大会&amp;英雄">
-<meta name="twitter:description" content="最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda, 这次省了不少麻烦">
+<meta name="twitter:description" content="最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda和WebDriverAgent, 这次省了不少麻烦.">
+<meta name="twitter:image" content="https://github.com/images/a1.png">
 
 
 
@@ -341,30 +347,35 @@
       
 
       
-        <p>   最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda, 这次省了不少麻烦<br><a id="more"></a><br>   Talk is  cheap , show your code!</p>
+        <p>   最近平台上的答题, 非常火热, 刚好上一段时间, 正好玩过跳一跳, 自动刷分( 腾讯爸爸, 已经修复了分数刷的再高都会被清零), 刚用过wda和WebDriverAgent, 这次省了不少麻烦.<br><a id="more"></a><br>   Talk is  cheap , show your code!</p>
 <h3 id="1-获取屏幕截屏"><a href="#1-获取屏幕截屏" class="headerlink" title="1,获取屏幕截屏"></a>1,获取屏幕截屏</h3><pre><code>def getImage():
     c = wda.Client()
     #获取手机屏幕截屏
     c.screenshot(&apos;screen.png&apos;)
     im = Image.open(&quot;./screen.png&quot;)
+    #根据自己屏幕自己调整
     region = im.crop((10, 210, 700, 400))
-    new_img = region.resize((800, 650), Image.BILINEAR)
-    #裁剪只有问题的图片, 并进行调整
-    new_img.save(&apos;./cutImage.png&apos;, quality=100)
+    region.save(&apos;./cutImage.png&apos;, quality=100)
 </code></pre><h3 id="2-提取图片的文字"><a href="#2-提取图片的文字" class="headerlink" title="2,提取图片的文字"></a>2,提取图片的文字</h3><pre><code>text = pytesseract.image_to_string(Image.open(&apos;cutImage.png&apos;), lang=&apos;chi_sim&apos;)
-  #有的问题是两行, 去除第二行两边的空格
-  result = text.replace(&quot;\n&quot;, &quot;&quot;)
-  print(&apos;******&apos; + result + &apos;*******&apos;)
-  #打开百度
-  search(result)
+ #有的问题是两行, 去除第二行两边的空格
+ result = text.replace(&quot;\n&quot;, &quot;&quot;)
+ print(&apos;******&apos; + result + &apos;*******&apos;)
+ #打开百度
+ search(result)
 </code></pre><h3 id="3-打开百度搜索"><a href="#3-打开百度搜索" class="headerlink" title="3,打开百度搜索"></a>3,打开百度搜索</h3><pre><code>def search(text):
    #百度打开搜索的问题
    result= &apos;https://baidu.com/s?wd=&apos; + text
    #对result中的中文进行处理
    result = urllib.parse.quote(result, safe=&apos;/:?=&apos;)
    webbrowser.open(result)
-</code></pre><p><em>人活着还是要有点追求的, 有更好的方法, 欢迎交流仅供学习</em></p>
-
+</code></pre><h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4,总结"></a>4,总结</h3><pre><code>1,对于常规的问题,还是让人满意的(要让我答这道题, 我只能说我吃过玉米和马铃薯)
+</code></pre><p>   <img src="/images/a1.png" width="50%" height="50%"><br>   <img src="/images/q1.png" width="50%" height="50%"> </p>
+<pre><code>2, 对于以下类似这种问题,表示无奈
+</code></pre><p>   <img src="/images/a.png" width="50%" height="50%"> </p>
+<p>   百度给的结果是这样的</p>
+<p>   <img src="/images/q.png" width="50%" height="50%"> </p>
+<pre><code>3, 还有很多不完整的地方比如获取截屏的时机,不知道试题什么时候出现,只能答题开始一直获取,换个思路是不是可以通过抓包抓取试题呢, 如果可以省不少麻烦,待验证.     
+</code></pre>
       
     </div>
     
@@ -378,6 +389,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
       
 
       
@@ -499,7 +516,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -556,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-获取屏幕截屏"><span class="nav-number">1.</span> <span class="nav-text">1,获取屏幕截屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-提取图片的文字"><span class="nav-number">2.</span> <span class="nav-text">2,提取图片的文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-打开百度搜索"><span class="nav-number">3.</span> <span class="nav-text">3,打开百度搜索</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-获取屏幕截屏"><span class="nav-number">1.</span> <span class="nav-text">1,获取屏幕截屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-提取图片的文字"><span class="nav-number">2.</span> <span class="nav-text">2,提取图片的文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-打开百度搜索"><span class="nav-number">3.</span> <span class="nav-text">3,打开百度搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-总结"><span class="nav-number">4.</span> <span class="nav-text">4,总结</span></a></li></ol></div>
             
 
           </div>
